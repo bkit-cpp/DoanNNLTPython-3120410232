@@ -1,0 +1,96 @@
+{% extends 'store/layouts/main.html' %}
+{% load static %}
+{% block content  %}
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Cart</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white"><a href="{% url 'cart' %}">Cart</li>
+    </ol>
+</div>
+
+     <!-- Cart Page Start -->
+     <div class="container-fluid py-5 cartdata">
+        <div class="container py-5 ">
+            <div class="table-responsive ">
+                <table class="table  ">
+                    
+                    <thead>
+                      <tr>
+                        <th scope="col">Products</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% if cart %}
+                        {% for item in cart %}
+                        <tr class="product_data">
+                            <th scope="row">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ item.product.product_image.url }}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                </div>
+                            </th>
+                            <td>
+                                <p class="mb-0 mt-4 prod-name" data-product-name="{{ item.name }}">{{ item.name }}</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">${{ item.product.selling_price }}</p>
+                            </td>
+                            <td>
+                               
+                               <div class="input-group quantity mt-4" style="width: 100px;">            
+                                    <div class="input-group-btn">
+                                        <input type="hidden" class="prod_id" value="{{item.product.id}}"/>
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm btn-minus rounded-circle changeQuantity bg-light border" data-item="{{item.product.id}}">
+                                        <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm text-center border-0 qty-input prod-qty-{{item.product.id}}" value="{{ item.quantity }}">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle changeQuantity bg-light border" data-item="{{item.product.id}}">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            
+                           <!-- {% csrf_token %}
+                            <input type="hidden" class="prod_id" value="{{item.product.id}}"/>
+                            <input type="text" class="form-control form-control-sm text-center border-0 qty-input " value="{{ item.quantity }}">
+					         <button class="btn btn-sm btn-primary changeQuantity" data-item="{{item.product.id}}"><i class="fa fa-sync"></i></button>
+                           -->
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">${{ item.subtotal }}</p>
+                            </td>
+                            <td>
+                                <button class="btn btn-md rounded-circle bg-light border mt-4 delete-cart-item" data-item="{{item.product.id}}" >
+                                    <i class="fa fa-times text-danger"></i>
+                                </button>
+                            </td>
+
+                        
+                        </tr>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-outline-success " id="checkout-btn" >
+                            Checkout
+                        </button>
+                       
+                        {% else %}
+                        
+                           <h4> YOUR CART IS EMPTY</h4>
+                        {% endif %}
+                         <a href="{% url 'checkoutpage'%}" class="btn btn-outline-success">Checkout Page</a>
+                    </tbody>
+                </table>
+            </div>
+         
+        </div>
+    </div>
+    <!-- Cart Page End -->
+    {% endblock %}

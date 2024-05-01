@@ -1,0 +1,38 @@
+{% extends 'store/layouts/main.html' %}
+{% block content  %}
+<div class="container-fluid fruite py-5">
+    <div class="container py-5">
+        <div class="tab-class text-center">
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade p-0 active show">
+                    {% for item in products %}
+                    <div class="row g-4">
+                        <div class="col-lg-12">
+                            <div class="row g-4">
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="rounded position-relative fruite-item">
+                                        <div class="fruite-img">
+                                            <img src="{{item.product_image.url}}" class="img-fluid w-100 rounded-top" alt="Product Image">
+                                        </div>
+                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style=" center:10px; left: -1px;">{{category_name.name}}</div>
+                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                            <a href="{% url 'productdetails' item.category.slug item.slug %}"> <h4>{{item.name}}</h4></a>
+                                            <p>{{item.description}}</p>
+                                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                                <p class="text-dark fs-5 fw-bold mb-0">{{item.original_price| stringformat:'d'}}</p>
+                                                <p class="text-dark fs-5 fw-bold mb-0">{{item.selling_price | stringformat:'d'}}</p>
+                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary addtoCartBtn"></i> Add to cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor%}
+                </div>
+            </div>
+        </div>      
+    </div>
+</div>
+{% endblock%}

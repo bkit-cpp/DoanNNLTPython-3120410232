@@ -1,0 +1,61 @@
+
+.chatbot {
+  max-width: 350px; /* Điều chỉnh kích thước của chatbot container */
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden; /* Tránh việc overflow ra ngoài container */
+}
+
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatbox {
+  list-style-type: none;
+  padding: 10px;
+  max-height: 300px; /* Điều chỉnh chiều cao tối đa của chatbox */
+  overflow-y: auto; /* Cho phép cuộn khi nội dung vượt quá kích thước */
+}
+
+.chatbox li {
+  margin-bottom: 10px;
+}
+
+.incoming {
+  display: flex;
+}
+
+.incoming .material-symbols-outlined {
+  margin-right: 10px;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.chat-input textarea {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+.chat-input #send-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
